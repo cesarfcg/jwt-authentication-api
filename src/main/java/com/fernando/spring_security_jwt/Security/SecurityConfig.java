@@ -22,8 +22,7 @@ public class SecurityConfig {
         http.csrf(csrf -> csrf.disable())
                 .authorizeHttpRequests(auth -> auth.requestMatchers("/register").permitAll()
                         .requestMatchers("/admin").hasAuthority("ADMIN")
-                        .anyRequest().authenticated())
-                .formLogin(form -> form.permitAll());
+                        .anyRequest().authenticated());
         return http.build();
     }
 //    @Bean
