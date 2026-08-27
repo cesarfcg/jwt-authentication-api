@@ -28,14 +28,7 @@ PasswordEncoder
    ├── Verifica senha
    │
    ▼
-JwtService
-   │
-   ├── Gera JWT
-   │
-   ▼
-Cliente
-   │
-   └── Recebe JWT
+
 
 ### JWT.io
 
