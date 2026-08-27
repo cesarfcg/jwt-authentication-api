@@ -34,7 +34,13 @@ public class TokenProvider {
         return Keys.hmacShaKeyFor(secret.getBytes());
     }
     public boolean tokenIsValid(String token){
-        return true;
+        try {
+            getClaims(token);
+            return true;
+        }
+        catch (Exception e) {
+            return false;
+        }
     }
     private Claims getClaims(String token){
         return Jwts.parser()
