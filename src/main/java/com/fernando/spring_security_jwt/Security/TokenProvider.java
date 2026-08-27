@@ -49,6 +49,10 @@ public class TokenProvider {
                 .parseSignedClaims(token)
                 .getPayload();
     }
+    private String getUsernameFromToken(String token){
+        Claims claims = getClaims(token);
+        return claims.getSubject();
+    }
 }
 
 
