@@ -2,6 +2,7 @@ package com.fernando.spring_security_jwt.Security;
 
 import com.fernando.spring_security_jwt.User.User;
 import com.fernando.spring_security_jwt.User.UserRequestDto;
+import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.security.Keys;
 import org.springframework.beans.factory.annotation.Value;
@@ -32,5 +33,17 @@ public class TokenProvider {
     private SecretKey getSigningKey() {
         return Keys.hmacShaKeyFor(secret.getBytes());
     }
+    public boolean tokenIsValid(String token){
+        return true;
+    }
+    private Claims getClaims(String token){
+        return Jwts.parser()
+                .verifyWith(getSigningKey())
+                .build()
+                .parseSignedClaims(token)
+                .getPayload();
+    }
 }
+
+
 

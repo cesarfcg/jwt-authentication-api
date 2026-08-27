@@ -36,3 +36,8 @@ JwtService
 Cliente
    │
    └── Recebe JWT
+### JWT.io
+
+Para visualizar e analisar os tokens JWT, pode ser utilizado o [JWT.io](https://jwt.io/).
+
+O JWT.io permite visualizar o **Header**, **Payload** e **Signature** de um JWT.
