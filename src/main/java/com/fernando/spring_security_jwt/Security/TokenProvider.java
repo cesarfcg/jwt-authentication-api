@@ -9,7 +9,6 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 import javax.crypto.SecretKey;
-import java.time.Instant;
 import java.util.Date;
 
 @Component
@@ -20,7 +19,7 @@ public class TokenProvider {
     private String expirationTime;
 
 
-    private String buildToken(User username) {
+    public String buildToken(User username) {
         Date now = new Date();
         Date expiration = new Date(now.getTime() + Long.parseLong(expirationTime));
         return Jwts.builder()
@@ -49,7 +48,7 @@ public class TokenProvider {
                 .parseSignedClaims(token)
                 .getPayload();
     }
-    private String getUsernameFromToken(String token){
+    public String getUsernameFromToken(String token){
         Claims claims = getClaims(token);
         return claims.getSubject();
     }
