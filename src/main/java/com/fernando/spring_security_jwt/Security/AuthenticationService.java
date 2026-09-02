@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 @Service
 public class AuthenticationService {
     private final JwtService jwtService;
-    @PostMapping("authenticate")
+    @PostMapping("/authenticate")
     public String authenticate(Authentication authentication){
         return jwtService.generateToken(authentication);
 

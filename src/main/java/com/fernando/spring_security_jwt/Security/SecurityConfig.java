@@ -22,7 +22,9 @@ public class SecurityConfig {
         http.csrf(csrf -> csrf.disable())
                 .authorizeHttpRequests(auth -> auth.requestMatchers("/register").permitAll()
                         .requestMatchers("/admin").hasAuthority("ADMIN")
-                        .anyRequest().authenticated());
+                        .anyRequest().authenticated())
+                .httpBasic(Customizer.withDefaults())
+                .oauth2ResourceServer(oauth2 -> oauth2.jwt(Customizer.withDefaults()));
         return http.build();
     }
 //    @Bean
