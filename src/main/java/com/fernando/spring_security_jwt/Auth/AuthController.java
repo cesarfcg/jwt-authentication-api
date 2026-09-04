@@ -5,6 +5,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -20,5 +21,9 @@ public class AuthController {
     public ResponseEntity<User> register(@RequestBody User user) {
         User savedUser = authService.register(user);
         return ResponseEntity.status(HttpStatus.CREATED).body(savedUser);
+    }
+    @PostMapping("/authenticate")
+    public String authenticate(Authentication authentication) {
+        return authService.authenticate(authentication);
     }
 }
