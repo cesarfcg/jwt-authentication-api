@@ -39,8 +39,9 @@ public class SecurityConfig {
                 .sessionManagement(session ->
                         session.sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 )
-                .authorizeHttpRequests(auth -> auth.requestMatchers("/register").permitAll()
-                        .requestMatchers("/admin").hasAuthority("ADMIN")
+            .authorizeHttpRequests(auth -> auth.requestMatchers("/register").permitAll()
+                        .requestMatchers("/admin").hasAuthority("SCOPE_ADMIN")
+                        .requestMatchers("/authenticate").authenticated()
                         .anyRequest().authenticated())
                 .httpBasic(Customizer.withDefaults())
                 .oauth2ResourceServer(oauth2 -> oauth2.jwt(Customizer.withDefaults()));
