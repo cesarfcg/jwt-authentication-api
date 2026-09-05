@@ -42,6 +42,15 @@ Spring valida o token com a chave pública (JwtDecoder)
 | POST   | `/authenticate` | Autenticado (Basic) | Retorna um JWT                     |
 | GET    | `/admin`        | `SCOPE_ADMIN`       | Rota de exemplo restrita a admins  |
 
+## Documentação da API (Swagger)
+ 
+A documentação interativa fica disponível em:
+ 
+```
+http://localhost:8080/swagger-ui.html
+```
+A documentação fica acessível sem login para facilitar testes rápidos e avaliações.
+ 
 ## Configuração
 
 ### Banco de dados
