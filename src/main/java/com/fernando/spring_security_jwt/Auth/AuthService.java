@@ -5,6 +5,7 @@ import com.fernando.spring_security_jwt.User.User;
 import com.fernando.spring_security_jwt.User.UserRepository;
 import com.fernando.spring_security_jwt.User.UserRequestDto;
 
+import com.fernando.spring_security_jwt.User.UserRole;
 import lombok.RequiredArgsConstructor;
 
 import org.springframework.security.core.Authentication;
@@ -25,6 +26,12 @@ public class AuthService {
         newUser.setUsername(userRequestDto.username());
         newUser.setPassword(passwordEncoder.encode(userRequestDto.password()));
         newUser.setRole(userRequestDto.role());
+        if (userRequestDto.role() == null) {
+            newUser.setRole(UserRole.USER);
+        }
+        if (userRepository.existsByUsername(newUser.getUsername())) {
+            throw new RuntimeException("User already exists");
+        }
         return userRepository.save(newUser);
     }
     public String authenticate(Authentication authentication) {

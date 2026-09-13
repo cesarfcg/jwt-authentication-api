@@ -1,9 +1,6 @@
 package com.fernando.spring_security_jwt.Auth;
 
-import com.fernando.spring_security_jwt.User.User;
-import com.fernando.spring_security_jwt.User.UserRequestDto;
-import com.fernando.spring_security_jwt.User.UserResponseDto;
-import com.fernando.spring_security_jwt.User.UserService;
+import com.fernando.spring_security_jwt.User.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -22,7 +19,7 @@ public class AuthController {
     public String admin() {
         return "Hello Admin";
     }
-    @PostMapping("/register")
+    @PostMapping("/auth/register")
     public ResponseEntity<UserResponseDto> register(@RequestBody UserRequestDto user) {
         User savedUser = authService.register(user);
         UserResponseDto userResponseDto = new UserResponseDto(
@@ -32,12 +29,16 @@ public class AuthController {
         );
         return ResponseEntity.status(HttpStatus.CREATED).body(userResponseDto);
     }
-    @GetMapping
-    public List<User> list() {
-        return userService.list();
-    }
-    @PostMapping("/authenticate")
+    @PostMapping("/auth/login")
     public String authenticate(Authentication authentication) {
         return authService.authenticate(authentication);
+    }
+    @GetMapping("/users/me")
+    public UserResponseDto getCurrentUser(Authentication authentication) {
+        return userService.findUser(authentication);
+    }
+    @GetMapping("/users")
+    public List<User> list() {
+        return userService.list();
     }
 }
