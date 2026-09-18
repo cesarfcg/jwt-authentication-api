@@ -80,11 +80,7 @@ jwt.private.key=classpath:app.key
 
 >`app.key`/`app.pub` versionados em `src/main/resources` apenas para facilitar rodar o projeto localmente. Gere seu próprio par.
 
-Para gerar um novo par:
 
-```bash
-# Chave privada (PKCS#8, sem senha)
-openssl genpkey -algorithm RSA -out app.key -pkeyopt rsa_keygen_bits:2048
 
 # Chave pública correspondente
 openssl rsa -pubout -in app.key -out app.pub
