@@ -36,11 +36,15 @@ Spring valida o token com a chave pública (JwtDecoder)
 
 ## Endpoints
 
-| Método | Rota            | Acesso              | Descrição                         |
-|--------|-----------------|---------------------|------------------------------------|
-| POST   | `/register`     | Público             | Cria um usuário                    |
-| POST   | `/authenticate` | Autenticado (Basic) | Retorna um JWT                     |
-| GET    | `/admin`        | `SCOPE_ADMIN`       | Rota de exemplo restrita a admins  |
+## Endpoints
+
+| Método | Rota | Acesso | Descrição |
+|--------|------|--------|-----------|
+| POST | `/auth/register` | Público | Cria um novo usuário |
+| POST | `/auth/login` | Público | Autentica o usuário e retorna um JWT |
+| GET | `/users` | Administrador — Bearer JWT | Retorna a lista de usuários |
+| GET | `/users/me` | Autenticado — Bearer JWT | Retorna os dados do usuário autenticado |
+| GET | `/admin` | Administrador — Bearer JWT | Rota de exemplo restrita a administradores |
 
 ## Documentação da API (Swagger)
  
@@ -76,11 +80,7 @@ jwt.private.key=classpath:app.key
 
 >`app.key`/`app.pub` versionados em `src/main/resources` apenas para facilitar rodar o projeto localmente. Gere seu próprio par.
 
-Para gerar um novo par:
 
-```bash
-# Chave privada (PKCS#8, sem senha)
-openssl genpkey -algorithm RSA -out app.key -pkeyopt rsa_keygen_bits:2048
 
 # Chave pública correspondente
 openssl rsa -pubout -in app.key -out app.pub
